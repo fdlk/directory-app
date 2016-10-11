@@ -35,10 +35,27 @@ export function getRsqlFragment (attribute, filter) {
   switch (attribute.fieldType) {
     case 'CATEGORICAL_MREF':
     case 'MREF':
-      return `${attribute.name}==${filter[0]}`
+      return `TODO`
     case 'BOOL':
-      return `${attribute.name}==${filter[attribute.name].value}`
+      const value = filter[attribute.name]
+      return `${attribute.name}==${value}`
   }
+}
+
+export function getComplexFilterLineRsqlFragment (name, line) {
+  if (line === 'OR') {
+    return ','
+  }
+  if (line === 'AND') {
+    return ';'
+  }
+  const { operator } = line
+  var value = line.value
+  if (operator) {
+    value = value.join(operator === 'AND' ? ';' : ',')
+  }
+  return `${name}==${value}`
+
 }
 
 export default function (state = defaultState, action) {
