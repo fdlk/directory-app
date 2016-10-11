@@ -14,10 +14,6 @@ export const Header = () => (
     <Link to='/directory' activeClassName={classes.activeRoute}>
       Directory
     </Link>
-    {' · '}
-    <Link to='/gavin/patient_zero' activeClassName={classes.activeRoute}>
-      Gavin
-    </Link>
   </div>
 
 )
