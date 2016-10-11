@@ -6,7 +6,7 @@ import Alerts from '../../containers/Alerts'
 export const Header = () => (
   <div>
     <Alerts />
-    <h1>Genetics Diagnostics App</h1>
+    <h1>BBMRI ERIC Directory</h1>
     <IndexLink to='/' activeClassName={classes.activeRoute}>
       Home
     </IndexLink>

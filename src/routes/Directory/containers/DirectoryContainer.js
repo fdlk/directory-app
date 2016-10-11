@@ -3,8 +3,8 @@ import { getRsql } from '../modules/Directory'
 
 import Directory from '../components/Directory'
 
-const mapStateToProps = (state) => ({
-  rsql : undefined
+const mapStateToProps = ({ Directory: state }) => ({
+  rsql       : state && getRsql(state),
 })
 
 export default connect(mapStateToProps, { })(Directory)

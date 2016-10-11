@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classes from './Directory.scss'
-import MaterialTypesSelectionContainer from '../containers/MaterialTypesSelectionContainer'
 
-export const Directory = () => (
+const propTypes = {
+  rsql: PropTypes.string
+}
+
+export const Directory = ({ rsql }) => (
   <div className={classes['Directory']}>
     <h4>Directory</h4>
-    <MaterialTypesSelectionContainer />
+    RSQL: <pre>{rsql}</pre>
   </div>
 )
+
+Directory.propTypes = propTypes
 
 export default Directory

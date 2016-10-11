@@ -68,7 +68,6 @@ describe('(Redux) filters', () => {
           ]
         }
       )
-      console.log('mref fragment', rsqlFragment)
       expect(rsqlFragment).to.eql('materials==PLASMA;TISSUE_FROZEN,materials==NAV');
     })
   })

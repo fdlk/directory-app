@@ -55,25 +55,26 @@ const ACTION_HANDLERS = {
 // Selectors
 // ------------------------------------
 export function getRsql (state, attributes) {
-  attributes
+  console.log('state and attributes', state, attributes)
+  return attributes && attributes
     .filter(attribute => state.hasOwnProperty(attribute.name))
     .map(attribute => {
       const filter = state[attribute.name]
-      return getRsql(attribute, filter)
+      return getRsqlFragment(attribute, filter)
     })
     .join(';')
 }
 
 export function getRsqlFragment (attribute, filter) {
+  console.log('getRsqlFragment', attribute, filter)
   switch (attribute.fieldType) {
     case 'CATEGORICAL_MREF':
     case 'MREF':
-      return filter[attribute.name]
+      return filter
         .map(line => getComplexFilterLineRsqlFragment(attribute.name, line))
         .join('')
     case 'BOOL':
-      const value = filter[attribute.name]
-      return `${attribute.name}==${value}`
+      return `${attribute.name}==${filter}`
   }
 }
 

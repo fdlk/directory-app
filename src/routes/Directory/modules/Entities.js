@@ -15,9 +15,6 @@ export const metadataReceived = (entityMetadata) => ({
   payload : entityMetadata
 })
 
-
-
-
 export const actions = { metadataReceived, fetchMetadata }
 
 // ------------------------------------
@@ -40,20 +37,26 @@ export function fetchMetadata (entityName) {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [METADATA_RECEIVED] : (state, action) => ({
-      ...state,
-      entityMetadata : {
-        ...state.entityMetadata,
-        [action.payload.name] : action.payload
-      }
-    })
+    ...state,
+    entityMetadata : {
+      ...state.entityMetadata,
+      [action.payload.name] : action.payload
+    }
+  })
 }
 
 // ------------------------------------
 // Selectors
 // ------------------------------------
-export function getAttributes(state) {
+export function getAttributes (state) {
   const collection = state.entityMetadata.eu_bbmri_eric_collections
-  return collection && collection.attributes
+  return collection && collection.attributes.reduce(addAttribute, [])
+}
+
+function addAttribute (soFar, attribute) {
+  return attribute.fieldType === 'COMPOUND'
+    ? attribute.attributes.reduce(addAttribute, soFar)
+    : [...soFar, attribute]
 }
 
 // ------------------------------------
