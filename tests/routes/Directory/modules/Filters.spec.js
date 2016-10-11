@@ -1,5 +1,9 @@
-import reducer, { defaultState, getRsql, getRsqlFragment, getComplexFilterLineRsqlFragment } from 'routes/Directory/modules/Filters';
-import deepFreeze from 'deep-freeze';
+import reducer, {
+  defaultState,
+  getRsql,
+  getRsqlFragment,
+  getComplexFilterLineRsqlFragment
+} from 'routes/Directory/modules/Filters'
 
 describe('(Redux) filters', () => {
   describe('(Reducer)', () => {
@@ -14,31 +18,6 @@ describe('(Redux) filters', () => {
         {sample_access_fee: true}
       )
       expect(rsqlFragment).to.eql('sample_access_fee==true');
-    })
-    it('converts an mref fragment', () => {
-      const rsqlFragment = getRsqlFragment(
-        {name: 'materials', fieldType: 'CATEGORICAL_MREF'},
-        {materials: [
-          {
-            operator : 'AND',
-            value    : ['PLASMA', 'TISSUE_FROZEN']
-          },
-          'OR',
-          {
-            value : 'NAV'
-          }
-        ]}
-      )
-      expect(rsqlFragment).to.eql('');
-    })
-
-    it('converts a complex filter line', () => {
-      const rsqlFragment =
-        getComplexFilterLineRsqlFragment('materials', {
-          operator : 'AND',
-          value    : ['PLASMA', 'TISSUE_FROZEN']
-        })
-      expect(rsqlFragment).to.eql('materials==PLASMA;TISSUE_FROZEN')
     })
 
     it('converts a complex filter line with OR operator', () => {
@@ -59,6 +38,38 @@ describe('(Redux) filters', () => {
           value : 'NAV'
         })
       expect(rsqlFragment).to.eql('materials==NAV')
+    })
+
+    it('converts a complex filter line', () => {
+      const rsqlFragment =
+        getComplexFilterLineRsqlFragment('materials', {
+          operator: 'AND',
+          value: ['PLASMA', 'TISSUE_FROZEN']
+        })
+      expect(rsqlFragment).to.eql('materials==PLASMA;TISSUE_FROZEN')
+    })
+
+    it('converts an mref fragment', () => {
+      const rsqlFragment = getRsqlFragment(
+        {
+          name: 'materials',
+          fieldType: 'CATEGORICAL_MREF'
+        },
+        {
+          materials: [
+            {
+              operator: 'AND',
+              value: ['PLASMA', 'TISSUE_FROZEN']
+            },
+            'OR',
+            {
+              value: 'NAV'
+            }
+          ]
+        }
+      )
+      console.log('mref fragment', rsqlFragment)
+      expect(rsqlFragment).to.eql('materials==PLASMA;TISSUE_FROZEN,materials==NAV');
     })
   })
 })

@@ -35,7 +35,9 @@ export function getRsqlFragment (attribute, filter) {
   switch (attribute.fieldType) {
     case 'CATEGORICAL_MREF':
     case 'MREF':
-      return `TODO`
+      return filter[attribute.name]
+        .map(line => getComplexFilterLineRsqlFragment(attribute.name, line))
+        .join('')
     case 'BOOL':
       const value = filter[attribute.name]
       return `${attribute.name}==${value}`
