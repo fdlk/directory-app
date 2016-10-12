@@ -1,4 +1,5 @@
 import { get } from 'redux/modules/MolgenisApi'
+import { getRsql } from './Filters'
 
 // ------------------------------------
 // Constants
@@ -16,7 +17,7 @@ export const metadataReceived = (metadata) => ({
   payload : metadata
 })
 
-export const itemsReceived = (items) => ({
+export const dataReceived = (items) => ({
   type    : ITEMS_RECEIVED,
   payload : items
 })
@@ -24,29 +25,37 @@ export const itemsReceived = (items) => ({
 // ------------------------------------
 // Thunks
 // ------------------------------------
-export function fetchData (entityName) {
+export function fetchMetadata (entityName) {
   return function (dispatch, getState) {
     const { server, token } = getState().session
     return get(server, `v2/${entityName}`, token).then((json) => {
       const metadata = json.meta
-      const items = json.items
       dispatch(metadataReceived(metadata))
-      dispatch(itemsReceived(items))
     })
   }
 }
 
-export function fetchItems (entityName, rSql) {
+export function fetchData (entityName) {
   return function (dispatch, getState) {
-    const { server, token } = getState().session
-    return get(server, `v2/${entityName}?q=${rSql}`, token).then((json) => {
+    const { session: { server, token }, Directory: { entities, filters } } = getState()
+    const attributes = getAttributes(entities)
+    const rSql = getRsql(filters, attributes)
+
+    // TODO if rSql is empty, do not add the q parameter
+    let query
+    if(rSql === undefined) {
+      query = `v2/${entityName}`
+    } else {
+      query = `v2/${entityName}?q=${rSql}`
+    }
+    return get(server, query, token).then((json) => {
       const items = json.items
-      dispatch(itemsReceived(items))
+      dispatch(dataReceived(items))
     })
   }
 }
 
-export const actions = { metadataReceived, fetchData, itemsReceived, fetchItems }
+export const actions = { metadataReceived, dataReceived, fetchData, fetchMetadata }
 
 // ------------------------------------
 // Action Handlers

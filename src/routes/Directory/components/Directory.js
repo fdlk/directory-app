@@ -21,7 +21,7 @@ export const Directory = ({ queryPayload, items, doNegotiate, isUpdate }) => {
     <BootstrapTable pagination data={items} search>
       <TableHeaderColumn isKey dataField='id'>Collection ID</TableHeaderColumn>
       <TableHeaderColumn dataField='name'>Collection name</TableHeaderColumn>
-      <TableHeaderColumn dataFormat={cell => cell.id} dataField='biobank'>Biobank ID</TableHeaderColumn>
+      <TableHeaderColumn dataFormat={cell => cell && cell.id} dataField='biobank'>Biobank ID</TableHeaderColumn>
     </BootstrapTable>
   </div>
 }

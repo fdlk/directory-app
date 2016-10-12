@@ -1,6 +1,6 @@
 import { injectReducer } from '../../store/reducers'
 import { login } from 'redux/modules/Session'
-import { fetchData } from './modules/Entities'
+import { fetchMetadata, fetchData } from './modules/Entities'
 
 export default (store) => ({
   path : 'directory',
@@ -21,7 +21,9 @@ export default (store) => ({
       if (!state.session || !state.session.server || !state.session.server.apiUrl) {
         const loginAction = login({ apiUrl : 'https://molgenis52.gcc.rug.nl/api/' }, 'admin', 'admin')
         store.dispatch(loginAction).then(() =>
-          store.dispatch(fetchData('eu_bbmri_eric_collections'))
+          store.dispatch(fetchMetadata('eu_bbmri_eric_collections')).then(() =>
+              store.dispatch(fetchData('eu_bbmri_eric_collections'))
+          )
         )
       } else {
         store.dispatch(fetchData('eu_bbmri_eric_collections'))
