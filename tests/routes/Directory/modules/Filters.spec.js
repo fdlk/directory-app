@@ -15,7 +15,7 @@ describe('(Redux) filters', () => {
     it('converts a boolean fragment', () => {
       const rsqlFragment = getRsqlFragment(
         {name: 'sample_access_fee', fieldType: 'BOOL'},
-        {sample_access_fee: true}
+        true
       )
       expect(rsqlFragment).to.eql('sample_access_fee==true');
     })
