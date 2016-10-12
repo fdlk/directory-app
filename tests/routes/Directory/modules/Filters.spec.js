@@ -15,7 +15,7 @@ describe('(Redux) filters', () => {
     it('converts a boolean fragment', () => {
       const rsqlFragment = getRsqlFragment(
         {name: 'sample_access_fee', fieldType: 'BOOL'},
-        {sample_access_fee: true}
+        true
       )
       expect(rsqlFragment).to.eql('sample_access_fee==true');
     })
@@ -35,7 +35,7 @@ describe('(Redux) filters', () => {
     it('converts a complex filter line with single value', () => {
       const rsqlFragment =
         getComplexFilterLineRsqlFragment('materials', {
-          value : 'NAV'
+          value : {id: 'NAV'}
         })
       expect(rsqlFragment).to.eql('materials==NAV')
     })
@@ -44,7 +44,7 @@ describe('(Redux) filters', () => {
       const rsqlFragment =
         getComplexFilterLineRsqlFragment('materials', {
           operator: 'AND',
-          value: ['PLASMA', 'TISSUE_FROZEN']
+          value: [{id: 'PLASMA'}, {id: 'TISSUE_FROZEN'}]
         })
       expect(rsqlFragment).to.eql('materials==PLASMA;TISSUE_FROZEN')
     })
@@ -59,11 +59,11 @@ describe('(Redux) filters', () => {
           materials: [
             {
               operator: 'AND',
-              value: ['PLASMA', 'TISSUE_FROZEN']
+              value: [{id: 'PLASMA'}, {id: 'TISSUE_FROZEN'}]
             },
             'OR',
             {
-              value: 'NAV'
+              value: {id: 'NAV'}
             }
           ]
         }
