@@ -1,4 +1,5 @@
-import { fetch } from 'redux/modules/MolgenisApi'
+import fetch from 'isomorphic-fetch'
+
 import { combineReducers } from 'redux'
 import entities, * as fromEntities from './Entities'
 import filters, * as fromFilters from './Filters'

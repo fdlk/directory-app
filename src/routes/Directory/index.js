@@ -23,6 +23,8 @@ export default (store) => ({
         store.dispatch(loginAction).then(() =>
           store.dispatch(fetchData('eu_bbmri_eric_collections'))
         )
+      } else {
+        store.dispatch(fetchData('eu_bbmri_eric_collections'))
       }
 
       /*  Return getComponent   */
