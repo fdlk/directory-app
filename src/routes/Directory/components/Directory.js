@@ -14,7 +14,7 @@ export const Directory = ({ queryPayload, items, doNegotiate, isUpdate }) => {
   return <div className={classes['Directory']}>
     <h4>Directory</h4>
     <Button bsStyle='success' onClick={() => doNegotiate(queryPayload)}>
-        {isUpdate ? "Update selection in negotiator" : "Start negotiation"}
+      {isUpdate ? "Update selection in negotiator" : "Start negotiation"}
     </Button>
     <pre>{JSON.stringify(queryPayload, null, 2)}</pre>
     <h2>items</h2>
