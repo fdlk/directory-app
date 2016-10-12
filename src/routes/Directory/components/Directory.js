@@ -23,9 +23,6 @@ export const Directory = ({ rsql, humanReadable, filters, items }) => {
             <TableHeaderColumn dataFormat={format} dataField='biobank'>Biobank ID</TableHeaderColumn>
 
         </BootstrapTable>
-        <ul>
-
-        </ul>
         RSQL: <pre>{rsql}</pre>
         Human readable: <pre>{humanReadable}</pre>
         filters: <pre>{JSON.stringify(filters, null, 2)}</pre>
