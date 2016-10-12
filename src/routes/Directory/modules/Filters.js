@@ -89,7 +89,9 @@ export function getComplexFilterLineRsqlFragment (name, line) {
   const { operator } = line
   var value = line.value
   if (operator) {
-    value = value.join(operator === 'AND' ? ';' : ',')
+    value = value.map(v => v.id).join(operator === 'AND' ? ';' : ',')
+  } else {
+    value = value.id
   }
   return `${name}==${value}`
 }
@@ -112,7 +114,7 @@ export function getHumanReadableFragment (attribute, filter) {
         .map(line => getComplexFilterLineHumanReadableFragment(attribute.label, line))
         .join('')
     case 'BOOL':
-      return filter ? attribute.label : 'not ' + attribute.label
+      return filter ? attribute.label + ' is required' : attribute.label + ' is not required'
   }
 }
 
@@ -126,7 +128,9 @@ export function getComplexFilterLineHumanReadableFragment (label, line) {
   const { operator } = line
   var value = line.value
   if (operator) {
-    value = value.join(operator === 'AND' ? ' and ' : ' or ')
+    value = value.map(v => v.label).join(operator === 'AND' ? ' and ' : ' or ')
+  } else {
+    value = value.label
   }
   return `${label} is ${value}`
 }
@@ -138,11 +142,15 @@ export const defaultState = {
   materials : [
     {
       operator : 'AND',
-      value    : ['PLASMA', 'TISSUE_FROZEN']
+      value : [{
+        id : 'PLASMA', label : 'Plasma'
+      }, {
+        id : 'TISSUE_FROZEN', label : 'Cryo tissue'
+      }]
     },
     'OR',
     {
-      value : 'NAV'
+      value : { id: 'NAV', label: 'Not available' }
     }
   ],
   sample_access_fee : true
