@@ -148,8 +148,7 @@ export const defaultState = {
     {
       value : { id : 'NAV', label : 'Not available' }
     }
-  ],
-  sample_access_fee : true
+  ]
 }
 
 export default function (state = defaultState, action) {
