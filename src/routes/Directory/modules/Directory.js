@@ -38,8 +38,7 @@ export const doNegotiate = (queryPayload) => {
       body        : JSON.stringify(queryPayload)
     }).then(function(response){
       response.text().then(function(text){
-        alert(text)
-        window.location = text
+        window.location.href = text
       })
     })
   }
