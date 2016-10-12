@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { getRsql } from '../modules/Directory'
+import { getRsql, getHumanReadable } from '../modules/Directory'
 
 import Directory from '../components/Directory'
 
 const mapStateToProps = ({ Directory: state }) => ({
   rsql    : state && getRsql(state),
+  humanReadable : state && getHumanReadable(state),
   filters : state && state.filters
 })
 

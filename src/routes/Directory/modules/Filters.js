@@ -55,7 +55,6 @@ const ACTION_HANDLERS = {
 // Selectors
 // ------------------------------------
 export function getRsql (state, attributes) {
-  console.log('state and attributes', state, attributes)
   return attributes && attributes
     .filter(attribute => state.hasOwnProperty(attribute.name))
     .map(attribute => {
@@ -66,7 +65,6 @@ export function getRsql (state, attributes) {
 }
 
 export function getRsqlFragment (attribute, filter) {
-  console.log('getRsqlFragment', attribute, filter)
   switch (attribute.fieldType) {
     case 'CATEGORICAL_MREF':
     case 'MREF':
@@ -91,6 +89,43 @@ export function getComplexFilterLineRsqlFragment (name, line) {
     value = value.join(operator === 'AND' ? ';' : ',')
   }
   return `${name}==${value}`
+}
+
+export function getHumanReadable(state, attributes){
+  return attributes && attributes
+      .filter(attribute => state.hasOwnProperty(attribute.name))
+      .map(attribute => {
+        const filter = state[attribute.name]
+        return getHumanReadableFragment(attribute, filter)
+      })
+      .join('\n')
+}
+
+export function getHumanReadableFragment (attribute, filter) {
+  switch (attribute.fieldType) {
+    case 'CATEGORICAL_MREF':
+    case 'MREF':
+      return filter
+        .map(line => getComplexFilterLineHumanReadableFragment(attribute.label, line))
+        .join('')
+    case 'BOOL':
+      return filter ? attribute.label : 'not ' + attribute.label
+  }
+}
+
+export function getComplexFilterLineHumanReadableFragment (label, line) {
+  if (line === 'OR') {
+    return ' or '
+  }
+  if (line === 'AND') {
+    return ' and '
+  }
+  const { operator } = line
+  var value = line.value
+  if (operator) {
+    value = value.join(operator === 'AND' ? ' and ' : ' or ')
+  }
+  return `${label} is ${value}`
 }
 
 // ------------------------------------
