@@ -80,11 +80,10 @@ function addAttribute (soFar, attribute) {
 }
 
 export function getCollections (state) {
-  console.log(state)
   const collections = state.items.map(function(item, index) {
     return {
-      "collectionID" : item.id,
-      "biobankID"    : item.biobank === undefined ? "" : item.biobank.id
+      "collectionId" : item.id,
+      "biobankId"    : item.biobank === undefined ? "" : item.biobank.id
     }
   })
   return collections
