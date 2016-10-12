@@ -87,11 +87,9 @@ export function getComplexFilterLineRsqlFragment (name, line) {
   const { operator } = line
   var value = line.value
   if (operator) {
-    value = value.map(v => v.id).join(operator === 'AND' ? ';' : ',')
-  } else {
-    value = value.id
+    return value.map(v => `${name}==${v.id}`).join(operator === 'AND' ? ';' : ',')
   }
-  return `${name}==${value}`
+  return `${name}==${value.id}`
 }
 
 export function getHumanReadable (state, attributes) {
