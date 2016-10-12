@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { getQueryPayload } from '../modules/Directory'
 
 import Directory from '../components/Directory'
 

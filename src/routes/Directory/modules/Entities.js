@@ -84,7 +84,7 @@ function addAttribute (soFar, attribute) {
 // ------------------------------------
 export const defaultState = {
   metadata    : {},
-  items       : {}
+  items       : []
 }
 
 export default function (state = defaultState, action) {
