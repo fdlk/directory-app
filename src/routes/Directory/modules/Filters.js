@@ -1,5 +1,4 @@
 
-
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -34,7 +33,6 @@ export const actions = { removeFilter, setFilter }
 // export function updateEntities() {
 //
 // }
-
 
 // ------------------------------------
 // Action Handlers
@@ -96,7 +94,7 @@ export function getComplexFilterLineRsqlFragment (name, line) {
   return `${name}==${value}`
 }
 
-export function getHumanReadable(state, attributes){
+export function getHumanReadable (state, attributes) {
   return attributes && attributes
       .filter(attribute => state.hasOwnProperty(attribute.name))
       .map(attribute => {
@@ -142,15 +140,15 @@ export const defaultState = {
   materials : [
     {
       operator : 'AND',
-      value : [{
-        id : 'PLASMA', label : 'Plasma'
+      value    : [{
+        id    : 'PLASMA', label : 'Plasma'
       }, {
-        id : 'TISSUE_FROZEN', label : 'Cryo tissue'
+        id    : 'TISSUE_FROZEN', label : 'Cryo tissue'
       }]
     },
     'OR',
     {
-      value : { id: 'NAV', label: 'Not available' }
+      value : { id : 'NAV', label : 'Not available' }
     }
   ],
   sample_access_fee : true

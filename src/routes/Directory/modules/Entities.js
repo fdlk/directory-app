@@ -4,7 +4,7 @@ import { get } from 'redux/modules/MolgenisApi'
 // Constants
 // ------------------------------------
 const METADATA_RECEIVED = 'Directory.METADATA_RECEIVED'
-const ITEMS_RECEIVED    = 'Directory.ITEMS_RECEIVED'
+const ITEMS_RECEIVED = 'Directory.ITEMS_RECEIVED'
 
 export const constants = { METADATA_RECEIVED, ITEMS_RECEIVED }
 
@@ -60,8 +60,8 @@ const ACTION_HANDLERS = {
     }
   }),
   [ITEMS_RECEIVED] : (state, action) => ({
-      ...state,
-      items : action.payload
+    ...state,
+    items : action.payload
   })
 }
 
@@ -83,8 +83,8 @@ function addAttribute (soFar, attribute) {
 // Reducer
 // ------------------------------------
 export const defaultState = {
-  metadata    : {},
-  items       : []
+  metadata : {},
+  items    : []
 }
 
 export default function (state = defaultState, action) {
