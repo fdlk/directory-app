@@ -14,7 +14,8 @@ export function getQueryPayload(state) {
   const url = 'https://molgenis52.gcc.rug.nl/api/v2/eu_bbmri_eric_collections?q=' + getRsql(state)
   const humanReadable = getHumanReadable(state)
   const collections = [] //TODO: mark!! fromEntities.getCollections(state.entities)
-  return { url, humanReadable, collections }
+  const nToken = state.nToken
+  return { url, humanReadable, collections, nToken }
 }
 
 export const reducer = combineReducers({ entities, filters })
