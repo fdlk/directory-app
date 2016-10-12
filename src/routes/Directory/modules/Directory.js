@@ -6,14 +6,17 @@ import filters, * as fromFilters from './Filters'
 // Selectors
 // ------------------------------------
 export const getAttributes = (state) => fromEntities.getAttributes(state.entities)
+export const getCollections = (state) => fromEntities.getCollections(state.entities)
 export const getRsql = (state) => state && state.filters && state.entities &&
   fromFilters.getRsql(state.filters, getAttributes(state))
+
 export const getHumanReadable = (state) => state && state.filters && state.entities &&
   fromFilters.getHumanReadable(state.filters, getAttributes(state))
+
 export function getQueryPayload (state) {
   const url = 'https://molgenis52.gcc.rug.nl/api/v2/eu_bbmri_eric_collections?q=' + getRsql(state)
   const humanReadable = getHumanReadable(state)
-  const collections = [] // TODO: mark!! fromEntities.getCollections(state.entities)
+  const collections = getCollections(state)
   const nToken = state.nToken
   return { url, humanReadable, collections, nToken }
 }

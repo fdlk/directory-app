@@ -79,6 +79,17 @@ function addAttribute (soFar, attribute) {
     : [...soFar, attribute]
 }
 
+export function getCollections (state) {
+  console.log(state)
+  const collections = state.items.map(function(item, index) {
+    return {
+      "collectionID" : item.id,
+      "biobankID"    : item.biobank && item.biobank.id
+    }
+  })
+  return collections
+}
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
