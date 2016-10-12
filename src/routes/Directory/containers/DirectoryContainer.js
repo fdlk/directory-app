@@ -7,7 +7,7 @@ const mapStateToProps = ({ Directory: state }) => ({
   rsql          : state && getRsql(state),
   humanReadable : state && getHumanReadable(state),
   filters       : state && state.filters,
-  items         : state && state.items
+  items         : state && state.entities.items
 })
 
 export default connect(mapStateToProps, { })(Directory)
