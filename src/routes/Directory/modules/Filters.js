@@ -1,3 +1,5 @@
+
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -26,6 +28,15 @@ export function setFilter (attributeName, filter) {
 export const actions = { removeFilter, setFilter }
 
 // ------------------------------------
+// Thunks
+// ------------------------------------
+// TODO remove filter will trigger data fetch -> remove filter is thunk
+// export function updateEntities() {
+//
+// }
+
+
+// ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
@@ -44,18 +55,9 @@ const ACTION_HANDLERS = {
 }
 
 // ------------------------------------
-// Thunks
-// ------------------------------------
-// TODO remove filter will trigger data fetch -> remove filter is thunk
-// export function updateEntities() {
-//
-// }
-
-// ------------------------------------
 // Selectors
 // ------------------------------------
 export function getRsql (state, attributes) {
-  console.log('state and attributes', state, attributes)
   return attributes && attributes
     .filter(attribute => state.hasOwnProperty(attribute.name))
     .map(attribute => {
@@ -66,7 +68,6 @@ export function getRsql (state, attributes) {
 }
 
 export function getRsqlFragment (attribute, filter) {
-  console.log('getRsqlFragment', attribute, filter)
   switch (attribute.fieldType) {
     case 'CATEGORICAL_MREF':
     case 'MREF':
