@@ -84,7 +84,7 @@ export function getCollections (state) {
   const collections = state.items.map(function(item, index) {
     return {
       "collectionID" : item.id,
-      "biobankID"    : item.biobank && item.biobank.id
+      "biobankID"    : item.biobank === undefined ? "" : item.biobank.id
     }
   })
   return collections

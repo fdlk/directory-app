@@ -21,6 +21,10 @@ export function getQueryPayload (state) {
   return { url, humanReadable, collections, nToken }
 }
 
-export const reducer = combineReducers({ entities, filters })
+export const doNegotiate = (queryPayload) => {
+  alert(queryPayload)
+}
+
+export const reducer = combineReducers({ entities, filters }, { })
 
 export default reducer
