@@ -1,3 +1,5 @@
+
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -26,6 +28,15 @@ export function setFilter (attributeName, filter) {
 export const actions = { removeFilter, setFilter }
 
 // ------------------------------------
+// Thunks
+// ------------------------------------
+// TODO remove filter will trigger data fetch -> remove filter is thunk
+// export function updateEntities() {
+//
+// }
+
+
+// ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
@@ -42,14 +53,6 @@ const ACTION_HANDLERS = {
     return newState
   }
 }
-
-// ------------------------------------
-// Thunks
-// ------------------------------------
-// TODO remove filter will trigger data fetch -> remove filter is thunk
-// export function updateEntities() {
-//
-// }
 
 // ------------------------------------
 // Selectors
