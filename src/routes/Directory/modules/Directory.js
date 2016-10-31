@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch'
 import { combineReducers } from 'redux'
 import entities, * as fromEntities from './Entities'
 import filters, * as fromFilters from './Filters'
+import editFilter, * as fromEditFilter from './EditFilter'
 
 // ------------------------------------
 // Selectors
@@ -44,6 +45,6 @@ export const doNegotiate = (queryPayload) => {
   }
 }
 
-export const reducer = combineReducers({ entities, filters }, { })
+export const reducer = combineReducers({ entities, filters, editFilter }, { })
 
 export default reducer

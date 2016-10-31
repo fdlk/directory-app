@@ -73,7 +73,7 @@ export function getRsqlFragment (attribute, filter) {
         .map(line => getComplexFilterLineRsqlFragment(attribute.name, line))
         .join('')
     case 'BOOL':
-      return `${attribute.name}==${filter}`
+      return filter.map(f =>`${attribute.name}==${f}`).join(',')
   }
 }
 
@@ -110,7 +110,7 @@ export function getHumanReadableFragment (attribute, filter) {
         .map(line => getComplexFilterLineHumanReadableFragment(attribute.label, line))
         .join('')
     case 'BOOL':
-      return filter ? attribute.label + ' is required' : attribute.label + ' is not required'
+      return attribute.label + ' is ' + filter.join (' or ')
   }
 }
 
