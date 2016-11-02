@@ -19,7 +19,7 @@ export default (store) => ({
 
       const state = store.getState()
       if (!state.session || !state.session.server || !state.session.server.apiUrl) {
-        const loginAction = login({ apiUrl : 'https://molgenis52.gcc.rug.nl/api/' }, 'admin', 'admin')
+        const loginAction = login({ apiUrl : 'https://molgenis02.gcc.rug.nl/api/' }, 'admin', 'directorydemo')
         store.dispatch(loginAction).then(() =>
           store.dispatch(fetchMetadata('eu_bbmri_eric_collections')).then(() =>
               store.dispatch(fetchData('eu_bbmri_eric_collections'))

@@ -17,7 +17,7 @@ export const getHumanReadable = (state) => state && state.filters && state.entit
   fromFilters.getHumanReadable(state.filters, getAttributes(state))
 
 export function getQueryPayload (state) {
-  const URL = 'https://molgenis52.gcc.rug.nl/api/v2/eu_bbmri_eric_collections?q=' + getRsql(state)
+  const URL = 'https://molgenis02.gcc.rug.nl/menu/main/bbmridirectory/directory?rSql=' + getRsql(state)
   const humanReadable = getHumanReadable(state)
   const collections = getCollections(state)
   const nToken = state.nToken
