@@ -17,7 +17,7 @@ export const getHumanReadable = (state) => state && state.filters && state.entit
   fromFilters.getHumanReadable(state.filters, getAttributes(state))
 
 export function getQueryPayload (state) {
-  const URL = 'https://molgenis02.gcc.rug.nl/menu/main/bbmridirectory/directory?rSql=' + getRsql(state)
+  const URL = 'https://molgenis02.gcc.rug.nl/menu/main/bbmridirectory/directory?q=' + getRsql(state)
   const humanReadable = getHumanReadable(state)
   const collections = getCollections(state)
   const nToken = state.nToken
@@ -31,7 +31,7 @@ export const doNegotiate = (queryPayload) => {
     })
 
     const { baseUrl } = getState()
-    fetch(baseUrl + '/menu/main/bbmridirectory/query', {
+    fetch(baseUrl + '/query', {
       method      : 'POST',
       headers     : headers,
       mode        : 'same-origin',
