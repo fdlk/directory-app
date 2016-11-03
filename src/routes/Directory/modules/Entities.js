@@ -50,7 +50,9 @@ export function fetchData (entityName) {
     }
     return get(server, query, token).then((json) => {
       const items = json.items
+      const meta = json.meta
       dispatch(dataReceived(items))
+      dispatch(metadataReceived(meta))
     })
   }
 }
