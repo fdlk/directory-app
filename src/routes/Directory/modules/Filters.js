@@ -1,4 +1,3 @@
-
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -56,6 +55,7 @@ const ACTION_HANDLERS = {
 // Selectors
 // ------------------------------------
 export function getRsql (state, attributes) {
+    console.log(state)
   return attributes && attributes
     .filter(attribute => state.hasOwnProperty(attribute.name))
     .map(attribute => {
@@ -66,13 +66,14 @@ export function getRsql (state, attributes) {
 }
 
 export function getRsqlFragment (attribute, filter) {
-  switch (attribute.fieldType) {
+    switch (attribute.fieldType) {
     case 'CATEGORICAL_MREF':
     case 'MREF':
-      return '(' + filter
+        return '(' + filter
         .map(line => getComplexFilterLineRsqlFragment(attribute.name, line))
         .join('') + ')'
     case 'BOOL':
+        console.log('Boolean encountered!')
       return filter.map(f =>`${attribute.name}==${f}`).join(',')
   }
 }
@@ -135,28 +136,28 @@ export function getComplexFilterLineHumanReadableFragment (label, line) {
 // Reducer
 // ------------------------------------
 export const defaultState = {
-  materials : [
-    {
-      operator: 'AND',
-      value : [
+    materials : [
         {
-          id: 'PLASMA',
-          label: 'Plasma'
+            operator: 'AND',
+            value : [
+                {
+                    id: 'PLASMA',
+                    label: 'Plasma'
+                },
+                {
+                    id: 'TISSUE_FROZEN',
+                    label: 'Cryo tissue'
+                }
+            ]
         },
+        'OR',
         {
-          id: 'TISSUE_FROZEN',
-          label: 'Cryo tissue'
+            value : {
+                id : 'NAV',
+                label : 'Not available'
+            }
         }
-      ]
-    },
-    'OR',
-    {
-      value : {
-        id : 'NAV',
-        label : 'Not available'
-      }
-    }
-  ]
+    ]
 }
 
 export default function (state = defaultState, action) {

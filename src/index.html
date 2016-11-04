@@ -8,5 +8,38 @@
 </head>
 <body>
   <div id="root" style="height: 100%"></div>
+  <script type="text/javascript">
+    console.log('initial state activated')
+    ___INITIAL_STATE__ = {
+      'Directory' : {
+            'filters' : {
+                materials : [
+                    {
+                        operator: 'AND',
+                        value : [
+                            {
+                                id: 'PLASMA',
+                                label: 'Plasma'
+                            },
+                            {
+                                id: 'TISSUE_FROZEN',
+                                label: 'Cryo tissue'
+                            }
+                        ]
+                    },
+                    'OR',
+                    {
+                        value : {
+                            id : 'NAV',
+                            label : 'Not available'
+                        }
+                    }
+                ],
+              sample_access_fee: [true],
+              sample_access_joint_project: [false]
+            }
+        }
+    }
+</script>
 </body>
 </html>
