@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import Button from 'react-bootstrap'
 import BoolFilter from './BoolFilter'
-import { FormGroup, Col, FormControl } from 'react-bootstrap'
+import { FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap'
 
 const propTypes = {
   attribute   : PropTypes.object.isRequired,

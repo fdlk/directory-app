@@ -69,9 +69,9 @@ export function getRsqlFragment (attribute, filter) {
   switch (attribute.fieldType) {
     case 'CATEGORICAL_MREF':
     case 'MREF':
-      return filter
+      return '(' + filter
         .map(line => getComplexFilterLineRsqlFragment(attribute.name, line))
-        .join('')
+        .join('') + ')'
     case 'BOOL':
       return filter.map(f =>`${attribute.name}==${f}`).join(',')
   }
@@ -137,16 +137,24 @@ export function getComplexFilterLineHumanReadableFragment (label, line) {
 export const defaultState = {
   materials : [
     {
-      operator : 'AND',
-      value    : [{
-        id    : 'PLASMA', label : 'Plasma'
-      }, {
-        id    : 'TISSUE_FROZEN', label : 'Cryo tissue'
-      }]
+      operator: 'AND',
+      value : [
+        {
+          id: 'PLASMA',
+          label: 'Plasma'
+        },
+        {
+          id: 'TISSUE_FROZEN',
+          label: 'Cryo tissue'
+        }
+      ]
     },
     'OR',
     {
-      value : { id : 'NAV', label : 'Not available' }
+      value : {
+        id : 'NAV',
+        label : 'Not available'
+      }
     }
   ]
 }

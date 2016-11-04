@@ -1,11 +1,8 @@
 import React, {Component, PropTypes} from 'react'
-import BoolFilter from './BoolFilter'
 import { Form } from 'react-bootstrap'
-import AttributeSelect from './AttributeSelect'
 import NewFilter from '../containers/NewFilter'
 
 const propTypes = {
-  sample_access_fee : PropTypes.bool,
   setFilter         : PropTypes.func,
   removeFilter      : PropTypes.func,
   rsql              : PropTypes.string,
@@ -13,7 +10,7 @@ const propTypes = {
   attributes        : PropTypes.array
 }
 
-export const Filters = ({sample_access_fee, setFilter, removeFilter, rsql, humanReadable, attributes}) => (
+export const Filters = ({setFilter, removeFilter, rsql, humanReadable, attributes}) => (
   <Form horizontal>
     {attributes && <NewFilter/>}
     <hr />
