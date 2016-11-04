@@ -26,8 +26,9 @@ export default (store) => ({
           )
         )
       } else {
-        store.dispatch(fetchData('eu_bbmri_eric_collections'))
-        store.dispatch(fetchMetadata('eu_bbmri_eric_collections'))
+        store.dispatch(fetchData('eu_bbmri_eric_collections')).then(() =>
+            store.dispatch(fetchMetadata('eu_bbmri_eric_collections'))
+        )
       }
 
       /*  Return getComponent   */
